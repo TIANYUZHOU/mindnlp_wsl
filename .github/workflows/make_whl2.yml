@@ -9,10 +9,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [ '3.6', '3.7', '3.8', '3.9' ]
+        python-version: [ '3.7', '3.8', '3.9' ]
     # 此处将涉及编译后whl适用的平台
     runs-on: ${{ matrix.os }}
-    name: Build Python ${{ matrix.python-version }}
+    name: Build ${{ matrix.os }} Python ${{ matrix.python-version }}
 
     steps:
       - name: Set up Python
