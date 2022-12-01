@@ -1,16 +1,19 @@
 name: make_whl
 
-on: push
+on: 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
-    # 此处将涉及编译后whl适用的平台
-    runs-on: ubuntu-20.04
-    
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: [ '3.6', '3.7', '3.8', '3.9' ]
-    
+    # 此处将涉及编译后whl适用的平台
+    runs-on: ${{ matrix.os }}
+    name: Build Python ${{ matrix.python-version }}
+
     steps:
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -19,14 +22,14 @@ jobs:
           
       - name: Make ${{ matrix.python-version }} Whl
         run: |
-          # 填写需要编译Whl包的Git仓库，此处以QPT为例
+          # 填写需要编译Whl包的Git仓库
           git clone https://github.com/TIANYUZHOU/mindnlp_wsl
           cd mindnlp_wsl
           python -m pip install -U setuptools wheel
           python setup.py sdist bdist_wheel
         
-      - name: 上传文件
+      - name: Upload File
         uses: actions/upload-artifact@v3
         with: 
-          name: 编译成功的Whl-Python${{ matrix.python-version }}
+          name: mindnlp-Whl-Python${{ matrix.python-version }}
           path: mindnlp_wsl/dist
