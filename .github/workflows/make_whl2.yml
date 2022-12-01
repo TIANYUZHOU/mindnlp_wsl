@@ -1,0 +1,32 @@
+name: make_whl
+
+on: push
+
+jobs:
+  build:
+    # 此处将涉及编译后whl适用的平台
+    runs-on: ubuntu-20.04
+    
+    strategy:
+      matrix:
+        python-version: [ '3.6', '3.7', '3.8', '3.9' ]
+    
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: Make ${{ matrix.python-version }} Whl
+        run: |
+          # 填写需要编译Whl包的Git仓库，此处以QPT为例
+          git clone https://github.com/TIANYUZHOU/mindnlp_wsl
+          cd mindnlp_wsl
+          python -m pip install -U setuptools wheel
+          python setup.py sdist bdist_wheel
+        
+      - name: 上传文件
+        uses: actions/upload-artifact@v3
+        with: 
+          name: 编译成功的Whl-Python${{ matrix.python-version }}
+          path: mindnlp_wsl/dist
