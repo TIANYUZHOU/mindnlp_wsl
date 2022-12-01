@@ -1,4 +1,4 @@
-name: make_whl
+name: make_whl2
 
 on: 
   # Allows you to run this workflow manually from the Actions tab
@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
         python-version: [ '3.7', '3.8', '3.9' ]
     # 此处将涉及编译后whl适用的平台
     runs-on: ${{ matrix.os }}
