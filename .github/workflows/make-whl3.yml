@@ -10,8 +10,9 @@
 name: make_whl3
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+#   release:
+#     types: [published]
 
 permissions:
   contents: read
