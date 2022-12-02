@@ -18,9 +18,14 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
-
-    runs-on: ubuntu-latest
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [ '3.7', '3.8', '3.9' ]
+    # 此处将涉及编译后whl适用的平台
+    runs-on: ${{ matrix.os }}
+    name: Build ${{ matrix.os }} Python ${{ matrix.python-version }}
 
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +43,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with: 
         name: mindnlp-Whl-Python${{ matrix.python-version }}
-        path: mindnlp_wsl/dist
+        path: dist
 #     - name: Publish package
 #       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
 #       with:
