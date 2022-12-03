@@ -10,9 +10,9 @@
 name: make_whl4
 
 on:
-  workflow_dispatch: 
+#   workflow_dispatch: 
   push:
-    branches: [ master ]
+#     branches: [ master ]
     tags:
     - 'v*'
 
