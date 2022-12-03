@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with: 
 #         name: mindnlp-Whl-Python${{ matrix.python-version }}
-        path: /dist
+        path: dist
