@@ -42,8 +42,8 @@ jobs:
     - name: Release and Upload Assets
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.tag }}
-        tag: ${{ env.tag }}
+#         name: ${{ env.tag }}
+#         tag: ${{ env.tag }}
         allowUpdates: true
         removeArtifacts: true
         artifacts: |
