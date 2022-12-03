@@ -34,22 +34,32 @@ jobs:
     - name: Build package
 #       run: python -m build
       run: python -m build --wheel
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    - name: Upload file
+      uses: actions/upload-artifact@v3
+      with: 
+        name: mindnlp-whl
+        path: dist/*
+    - name: Release and Upload Assets
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: |
-          Changes in this Release
-          - First Change
-          - Second Change
-        draft: false
-        prerelease: false
-#     - name: Upload file
-#       uses: actions/upload-artifact@v3
-#       with: 
-#         name: mindnlp-Whl-Python${{ matrix.python-version }}
-#         path: dist
+        name: ${{ env.tag }}
+        tag: ${{ env.tag }}
+        allowUpdates: true
+        removeArtifacts: true
+        artifacts: |
+          dist/*.whl
+
+#     - name: Create Release
+#       id: create_release
+#       uses: actions/create-release@v1
+#       env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#       with:
+#         tag_name: ${{ github.ref }}
+#         release_name: Release ${{ github.ref }}
+#         body: |
+#           Changes in this Release
+#           - First Change
+#           - Second Change
+#         draft: false
+#         prerelease: false
