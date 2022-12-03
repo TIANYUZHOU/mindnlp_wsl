@@ -33,9 +33,9 @@ jobs:
         pip install build
     - name: Build package
 #       run: python -m build
-      run: python -m build --wheel  --outdir dist/ .
+      run: python -m build --wheel
     - name: Upload file
       uses: actions/upload-artifact@v3
       with: 
 #         name: mindnlp-Whl-Python${{ matrix.python-version }}
-        path: .
+        path: /dist
