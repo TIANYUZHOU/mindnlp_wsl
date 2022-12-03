@@ -48,8 +48,8 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: ${{ github.ref }}
-        tag: ${{ github.ref }}
+#         name: ${{ github.ref }}
+#         tag: ${{ github.ref }}
         bodyFile: ""
         allowUpdates: true
         removeArtifacts: true
