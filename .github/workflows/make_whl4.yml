@@ -19,7 +19,7 @@ jobs:
         os: [ubuntu-latest]
         python-version: ['3.x']
     runs-on: ${{ matrix.os }}
-    name: Build ${{ matrix.os }} Python ${{ matrix.python-version }}
+    name: Create Whl Release
 
     steps:
     - uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
 #         name: ${{ env.tag }}
-#         tag: ${{ env.tag }}
+        tag: v1
         allowUpdates: true
         removeArtifacts: true
         artifacts: |
