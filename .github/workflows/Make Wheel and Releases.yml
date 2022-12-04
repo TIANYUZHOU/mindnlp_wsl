@@ -2,9 +2,10 @@ name: Make Wheel and Releases
 
 on:
   push:
-#     branches: [ master ]
+#     branches:
+#     - 'releases/**'
     tags:
-    - '*'
+    - 'v*'
 
 jobs:
   build:
